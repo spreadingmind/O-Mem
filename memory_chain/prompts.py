@@ -254,9 +254,9 @@ UNDERSTAND_USER_EXPERIENCE_PROMPT = """
         "text": "original message",
         "tags": {{
             "topic": ["event"],
-            "attitude": ["attitude towards the event": Postive or Negative or Mixed]
-            "reason" :["The reason concenring the attitude towards the event"]
-            "facts": ["The facts or events infered from the user's message"]
+            "attitude": ["attitude towards the event": Postive or Negative or Mixed],
+            "reason" :["The reason concenring the attitude towards the event"],
+            "facts": ["The facts or events infered from the user's message"],
             "attributes": ["The attributes of the user revealed by the user's message"]
         }},
         "summary": "One sentence summary of the message"
@@ -934,9 +934,9 @@ Output must be in strict JSON format as specified below.
 
 Example Output:
 {
-  "User preferences": ["play basketball","running"]
-  "Reason": Users like playing basketball and running with friends, which could be inferred from the messages.
-  "User preferences summary": love basketball and running.
+  "User preferences": ["play basketball", "running"],
+  "Reason": "Users like playing basketball and running with friends, which could be inferred from the messages.",
+  "User preferences summary": "love basketball and running."
 }
 
 """
@@ -970,7 +970,7 @@ Output must be in strict JSON format as specified below.
 === OUTPUT FORMAT (JSON) ===
 
 {
-  "User Attributes": ["unique user attribute 1", "unique user attribute 2" ... "unique user attribute n"]
+  "User Attributes": ["unique user attribute 1", "unique user attribute 2", ..., "unique user attribute n"],
   "Reason": "The reason for infering these user attributes from the input information."
 }
 
@@ -983,7 +983,7 @@ Input:
 Output:
 
 {
-  "User Attributes": ["The user hates singing in front of others.", "The user is from US."]
+  "User Attributes": ["The user hates singing in front of others.", "The user is from US."],
   "Reason": "The provided attributes show that the user hates singing in front of others and may be from US."
 }
 
@@ -1010,7 +1010,7 @@ Output must be in strict JSON format as specified below.
 === OUTPUT FORMAT (JSON) ===
 
 {
-  "User Attributes": {"attribute  1 aspect label":"unique user attribute 1", "attribute  2 aspect label": "unique user attribute 2" ... "attribute  n aspect label":"unique user attribute n"}
+  "User Attributes": {"attribute  1 aspect label":"unique user attribute 1", "attribute  2 aspect label": "unique user attribute 2", ..., "attribute  n aspect label":"unique user attribute n"},
   "Reason": "The reason for infering these user attributes from the input information."
 }
 
@@ -1023,7 +1023,7 @@ Input:
 Output:
 
 {
-  "User Attributes": ["user's singing preference":"The user hates singing in front of others.", "user's hometown":"The user is from US."]
+  "User Attributes": {"user's singing preference":"The user hates singing in front of others.", "user's hometown":"The user is from US."},
   "Reason": "The provided attributes show that the user hates singing in front of others and may be from US."
 }
 

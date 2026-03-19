@@ -65,7 +65,7 @@ class MemoryManager:
             try:
                 response = await self.llm_client.chat.completions.create(model=self.llm_model,messages=[{"role": "user", "content": UNDERSTAND_USER_EXPERIENCE_PROMPT.format(message=message)}])
 
-                understanding= json.loads(response.choices[0].message.content) 
+                understanding = extract_json_from_llm_output(response.choices[0].message.content)
                 if len(understanding["tags"]["topic"])!=len(understanding["tags"]["attitude"]) or  len(understanding["tags"]["attitude"])!=len(understanding["tags"]["facts"]):
                     understanding_with_index = "["+str(index)+"]: "+ understanding["summary"]
                     topics = understanding["tags"]["topic"][0]
@@ -310,7 +310,7 @@ class MemoryManager:
             try:
                 response = await client.chat.completions.create(model=self.llm_model,messages=self.create_messages_for_update_episodic_event_memory_concerning_new_message(episodic_event_memory=episodic_event_memory_profile,
                 message=message_with_understanding))
-                router_decision = json.loads(response.choices[0].message.content) 
+                router_decision = extract_json_from_llm_output(response.choices[0].message.content) 
             except:
                 import traceback
                 traceback.print_exc() 
@@ -334,7 +334,7 @@ class MemoryManager:
             try:
                 response = await client.chat.completions.create(model=self.llm_model,messages=self.create_messages_for_update_episodic_fact_memory_concerning_new_message(episodic_fact_memory=episodic_fact_memory_profile,
                 message=message_with_understanding))
-                router_decision = json.loads(response.choices[0].message.content) 
+                router_decision = extract_json_from_llm_output(response.choices[0].message.content) 
             except:
                 import traceback
                 traceback.print_exc() 
@@ -358,7 +358,8 @@ class MemoryManager:
             try:
                 response = await client.chat.completions.create(model=self.llm_model,messages=self.create_messages_for_update_episodic_attr_memory_concerning_new_message(episodic_attr_memory=episodic_attr_memory_profile,
                 message=message_with_understanding))
-                router_decision = json.loads(response.choices[0].message.content) 
+                raw_content = response.choices[0].message.content
+                router_decision = extract_json_from_llm_output(raw_content) 
                 action = router_decision["Action"]
                 target = router_decision["Target"]
                 print("Action: "+action+" happen concerning "+target)

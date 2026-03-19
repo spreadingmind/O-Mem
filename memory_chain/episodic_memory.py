@@ -120,7 +120,7 @@ class Episodic_Memory:
             while response == "":
                 try:
                     response =  await self.client.chat.completions.create(model=self.model, messages = episodic_memory_merge_message, temperature = 0.3)
-                    current_results = json.loads(response.choices[0].message.content)
+                    current_results = extract_json_from_llm_output(response.choices[0].message.content)
                     for group_name in current_results["Grouped Topics"].keys():
                         current_dict_result = {}
                         current_dict_result["group_name"] =  group_name
